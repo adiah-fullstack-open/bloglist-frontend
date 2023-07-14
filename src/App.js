@@ -45,6 +45,13 @@ const App = () => {
     }
   };
 
+  const handleLogout = async (event) => {
+    event.preventDefault();
+
+    window.localStorage.removeItem("loggedBlogAppUser");
+    setUser(null);
+  };
+
   const loginForm = () => (
     <form onSubmit={handleLogin}>
       <h2>Login</h2>
@@ -70,10 +77,17 @@ const App = () => {
     </form>
   );
 
+  const logoutButton = () => (
+    <button type="button" onClick={handleLogout}>
+      Logout
+    </button>
+  );
+
   const blogsList = () => (
     <div>
       <h2>blogs</h2>
       <p>{user.name} logged in</p>
+      {logoutButton()}
       {blogs.map((blog) => (
         <Blog key={blog.id} blog={blog} />
       ))}
